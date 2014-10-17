@@ -57,9 +57,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <div id="part-0---verify-prerequisities-formatting-required-libraries-data" class="section level3">
 <h3>Part 0 - Verify prerequisities: Formatting, required libraries, data</h3>
-<ul>
-<li>Required libraries</li>
-</ul>
+<div id="required-libraries" class="section level6">
+<h6>Required libraries</h6>
 <pre class="r"><code># Summarizing &amp; reshaping data
 library(plyr)         
 library(dplyr)   </code></pre>
@@ -94,17 +93,27 @@ library(lubridate)</code></pre>
 <pre class="r"><code># Prettyprinting
 library(xtable)
 library(knitr)</code></pre>
+</div>
+<div id="required-structure" class="section level6">
+<h6>Required structure</h6>
 <ul>
-<li>Ensure that data is available in the data subdirectory. If not, stop with error message.</li>
+<li>\ -&gt; the directory that contains this file, PA1_template.Rmd</li>
+<li>\data -&gt; Activity input data “activity.csv”</li>
+<li>\figure -&gt; Figures created by Knitr. Will be created if it doesn’t exist.</li>
 </ul>
-<pre class="r"><code>input_data &lt;- &quot;data/activity.csv&quot;
-ifelse(file.exists(&quot;data/activity.csv&quot;), &quot;File exists&quot;, stop(&quot;File doesn't exist&quot;))</code></pre>
-<pre><code>## [1] &quot;File exists&quot;</code></pre>
+<pre class="r"><code># Set global knitr options to ensure that figures are stored in the _figure_ subdirectory
+opts_chunk$set(fig.path='figure\\')  </code></pre>
+</div>
 </div>
 <div id="part-1---load-and-preprocess-the-data" class="section level3">
 <h3>Part 1 - Load and preprocess the data</h3>
 <p><em>Eval 1: Does the submission show code for reading in the dataet and/or processing the data?</em><br />Yes, this program uses <em>read.csv</em> to read in the dataset, and lubridate’s <em>ymd</em> to translate the “Date” string into a time format.</p>
-<pre class="r"><code>df_activity &lt;- read.csv(&quot;data/activity.csv&quot;,header=TRUE, as.is=TRUE)
+<pre class="r"><code># Check to make sure the file exists
+input_data &lt;- &quot;data/activity.csv&quot;
+ifelse(file.exists(&quot;data/activity.csv&quot;), &quot;File exists&quot;, stop(&quot;File doesn't exist&quot;))</code></pre>
+<pre><code>## [1] &quot;File exists&quot;</code></pre>
+<pre class="r"><code># ... and if it does, read it in
+df_activity &lt;- read.csv('data/activity.csv',header=TRUE, as.is=TRUE)
 df_activity$date &lt;- ymd(df_activity$date)</code></pre>
 </div>
 <div id="part-2---what-is-the-mean-total-of-steps-taken-per-day" class="section level3">
@@ -520,8 +529,8 @@ max_interval &lt;- as.numeric(df_max_interval[1,1])</code></pre>
 <h3>Part 4 - Imputing missing variables</h3>
 <p><em>Eval 6: Does the report describe and show with code a strategy for imputing missing data?</em></p>
 <p>Yes.</p>
-<p>Description of strategy for imputing missing data<br />1. Will replace missing step values for intervals with the <em>mean of step values over all invervals</em> by day over the entire data set.<br />2. Use mean over intervals, not days, to avoid imputing a positive number of steps in intervals where no activity usually occurs.</p>
-<p>Show with code a strategy for imputing missing data<br /> - See below.</p>
+<p>Description of strategy for imputing missing data:<br />1. What was done: Replace missing step values for intervals with the <em>mean of step values over all invervals</em> by day over the entire data set.<br />2. Why: Use mean over intervals, not days, to avoid imputing a positive number of steps in intervals where no activity usually occurs.</p>
+<p>Show with code a strategy for imputing missing data.<br /> - See below.</p>
 <pre class="r"><code>complete_count &lt;- sum(complete.cases(df_activity)) # works because FALSE/missing is counted as 0, TRUE is counted as 1
 missing_count &lt;- length(df_activity$steps) - complete_count</code></pre>
 <p>Note: there are <em>2304</em> rows with missing observations.</p>

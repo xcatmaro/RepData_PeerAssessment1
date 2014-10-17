@@ -1,8 +1,7 @@
 # Reproducible Research: Peer Assessment 1
 
 ### Part 0 - Verify prerequisities: Formatting, required libraries, data
-
-- Required libraries  
+###### Required libraries  
 
 ```r
 # Summarizing & reshaping data
@@ -53,9 +52,25 @@ library(xtable)
 library(knitr)
 ```
 
-- Ensure that data is available in the data subdirectory. If not, stop with error message.  
+###### Required structure
+   + \\ -> the directory that contains this file, PA1_template.Rmd
+   + \\data -> Activity input data "activity.csv"
+   + \\figure -> Figures created by Knitr. Will be created if it doesn't exist. 
+
 
 ```r
+# Set global knitr options to ensure that figures are stored in the _figure_ subdirectory
+opts_chunk$set(fig.path='figure\\')  
+```
+
+
+### Part 1 - Load and preprocess the data
+_Eval 1: Does the submission show code for reading in the dataet and/or processing the data?_    
+Yes, this program uses _read.csv_ to read in the dataset, and lubridate's _ymd_ to translate the "Date" string into a time format. 
+
+
+```r
+# Check to make sure the file exists
 input_data <- "data/activity.csv"
 ifelse(file.exists("data/activity.csv"), "File exists", stop("File doesn't exist"))
 ```
@@ -64,13 +79,9 @@ ifelse(file.exists("data/activity.csv"), "File exists", stop("File doesn't exist
 ## [1] "File exists"
 ```
 
-### Part 1 - Load and preprocess the data
-_Eval 1: Does the submission show code for reading in the dataet and/or processing the data?_    
-Yes, this program uses _read.csv_ to read in the dataset, and lubridate's _ymd_ to translate the "Date" string into a time format. 
-
-
 ```r
-df_activity <- read.csv("data/activity.csv",header=TRUE, as.is=TRUE)
+# ... and if it does, read it in
+df_activity <- read.csv('data/activity.csv',header=TRUE, as.is=TRUE)
 df_activity$date <- ymd(df_activity$date)
 ```
 
@@ -94,7 +105,7 @@ ggplot(data = activity_summary_by_day, aes(x=Date, y=TotalStepsPerDay), na.rm = 
 ## Warning: Removed 8 rows containing missing values (position_stack).
 ```
 
-![plot of chunk hist_total_steps_per_day](./PA1_template_files/figure-html/hist_total_steps_per_day.png) 
+![plot of chunk hist_total_steps_per_day](figure\hist_total_steps_per_day.png) 
 
 _Eval 3: Are both the mean and median number of steps taken each day reported?_  
 Yes, see below.
@@ -182,7 +193,7 @@ colnames(avg_daily_activity_by_interval) <- c("Interval", "MeanStepsByInterval")
 ggplot(data=avg_daily_activity_by_interval, aes(x=Interval, y=MeanStepsByInterval), na.rm = TRUE) + geom_line(colour="black", stat="identity") +  labs(x = "5 minute interval", y = "Mean number of steps taken across all days") + theme_bw(base_size = 12)
 ```
 
-![plot of chunk time_series_plot](./PA1_template_files/figure-html/time_series_plot.png) 
+![plot of chunk time_series_plot](figure\time_series_plot.png) 
 
 _Eval 5: Does the report give the 5-minute interval that, on average, contains the maximum number of steps?_     
 Yes, see below after the embedded r code. 
@@ -205,12 +216,12 @@ _Eval 6: Does the report describe and show with code a strategy for imputing mis
 Yes.
   
     
-Description of strategy for imputing missing data       
-1. Will replace missing step values for intervals with the _mean of step values over all invervals_ by day over the entire data set.         
-2. Use mean over intervals, not days, to avoid imputing a positive number of steps in intervals where no activity usually occurs.         
+Description of strategy for imputing missing data:       
+1. What was done: Replace missing step values for intervals with the _mean of step values over all invervals_ by day over the entire data set.         
+2. Why: Use mean over intervals, not days, to avoid imputing a positive number of steps in intervals where no activity usually occurs.         
    
    
-Show with code a strategy for imputing missing data  
+Show with code a strategy for imputing missing data.  
   - See below.   
         
 
@@ -260,7 +271,7 @@ names(activity_summary_by_day_imputed) <- c("Date", "TotalStepsPerDayImputed", "
 ggplot(data = activity_summary_by_day_imputed, aes(x=Date, y=TotalStepsPerDayImputed), na.rm = TRUE) + geom_bar(colour="black", stat="identity") +  labs(x = "Date", y = "Total number of steps per day (imputed)") + theme_bw(base_size = 12)
 ```
 
-![plot of chunk Redo_Histogram](./PA1_template_files/figure-html/Redo_Histogram.png) 
+![plot of chunk Redo_Histogram](figure\Redo_Histogram.png) 
 
 Calculate and report the mean and median total number of steps taken per day (using the cleaned up data).
 
@@ -368,4 +379,4 @@ colnames(avg_daily_activity_by_interval_imputed) <- c("df_date_week", "date", "i
 ggplot(data=avg_daily_activity_by_interval_imputed, aes(x=interval, y=mean_steps_imputed), na.rm = TRUE) + geom_line(colour="black", stat="identity") +  labs(x = "5 minute interval", y = "Mean number of steps taken across all days") + theme_bw(base_size = 12) + facet_grid(df_date_week ~ .) 
 ```
 
-![plot of chunk imputed](./PA1_template_files/figure-html/imputed.png) 
+![plot of chunk imputed](figure\imputed.png) 

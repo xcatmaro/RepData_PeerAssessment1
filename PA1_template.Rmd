@@ -6,8 +6,7 @@ output:
 ---
 
 ### Part 0 - Verify prerequisities: Formatting, required libraries, data
-
-- Required libraries  
+###### Required libraries  
 ```{r_lib_summary, echo=TRUE}
 # Summarizing & reshaping data
 library(plyr)         
@@ -27,18 +26,30 @@ library(knitr)
 
 ```
 
-- Ensure that data is available in the data subdirectory. If not, stop with error message.  
-```{r data_check, echo=TRUE}
-input_data <- "data/activity.csv"
-ifelse(file.exists("data/activity.csv"), "File exists", stop("File doesn't exist"))
+###### Required structure
+   + \\ -> the directory that contains this file, PA1_template.Rmd
+   + \\data -> Activity input data "activity.csv"
+   + \\figure -> Figures created by Knitr. Will be created if it doesn't exist. 
+
+```{r global_knitr_options}
+# Set global knitr options to ensure that figures are stored in the _figure_ subdirectory
+opts_chunk$set(fig.path='figure\\')  
+
 ```
+
 
 ### Part 1 - Load and preprocess the data
 _Eval 1: Does the submission show code for reading in the dataet and/or processing the data?_    
 Yes, this program uses _read.csv_ to read in the dataset, and lubridate's _ymd_ to translate the "Date" string into a time format. 
 
 ```{r load_data, echo=TRUE}
-df_activity <- read.csv("data/activity.csv",header=TRUE, as.is=TRUE)
+
+# Check to make sure the file exists
+input_data <- "data/activity.csv"
+ifelse(file.exists("data/activity.csv"), "File exists", stop("File doesn't exist"))
+
+# ... and if it does, read it in
+df_activity <- read.csv('data/activity.csv',header=TRUE, as.is=TRUE)
 df_activity$date <- ymd(df_activity$date)
 ```
 
@@ -97,12 +108,12 @@ _Eval 6: Does the report describe and show with code a strategy for imputing mis
 Yes.
   
     
-Description of strategy for imputing missing data       
-1. Will replace missing step values for intervals with the _mean of step values over all invervals_ by day over the entire data set.         
-2. Use mean over intervals, not days, to avoid imputing a positive number of steps in intervals where no activity usually occurs.         
+Description of strategy for imputing missing data:       
+1. What was done: Replace missing step values for intervals with the _mean of step values over all invervals_ by day over the entire data set.         
+2. Why: Use mean over intervals, not days, to avoid imputing a positive number of steps in intervals where no activity usually occurs.         
    
    
-Show with code a strategy for imputing missing data  
+Show with code a strategy for imputing missing data.  
   - See below.   
         
 ```{r count_missing}
