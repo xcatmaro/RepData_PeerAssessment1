@@ -1,5 +1,5 @@
 ---
-# title: "Reproducible Research: Peer Assessment 1"
+# Title: "Reproducible Research: Peer Assessment 1"
 
 ### Part 0 - Verify prerequisities: Formatting, required libraries, data
 ###### Required libraries  
