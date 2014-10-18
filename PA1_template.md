@@ -1,4 +1,5 @@
-# Reproducible Research: Peer Assessment 1
+---
+# title: "Reproducible Research: Peer Assessment 1"
 
 ### Part 0 - Verify prerequisities: Formatting, required libraries, data
 ###### Required libraries  
@@ -7,27 +8,6 @@
 # Summarizing & reshaping data
 library(plyr)         
 library(dplyr)   
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-## 
-## The following objects are masked from 'package:plyr':
-## 
-##     arrange, count, desc, failwith, id, mutate, rename, summarise,
-##     summarize
-## 
-## The following object is masked from 'package:stats':
-## 
-##     filter
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 library(reshape2)
 
 # Plotting data
@@ -35,18 +15,7 @@ library(ggplot2)
 
 # Handling dates
 library(lubridate)
-```
 
-```
-## 
-## Attaching package: 'lubridate'
-## 
-## The following object is masked from 'package:plyr':
-## 
-##     here
-```
-
-```r
 # Prettyprinting
 library(xtable)
 library(knitr)
