@@ -29,7 +29,7 @@ library(knitr)
 
 ```{r global_knitr_options}
 # Set global knitr options to ensure that figures are stored in the _figure_ subdirectory
-opts_chunk$set(fig.path='figure\\')  
+opts_chunk$set(fig.path='figure/')  
 
 ```
 

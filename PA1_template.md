@@ -29,7 +29,7 @@ library(knitr)
 
 ```r
 # Set global knitr options to ensure that figures are stored in the _figure_ subdirectory
-opts_chunk$set(fig.path='figure\\')  
+opts_chunk$set(fig.path='figure/')  
 ```
 
 
@@ -74,7 +74,7 @@ ggplot(data = activity_summary_by_day, aes(x=Date, y=TotalStepsPerDay), na.rm = 
 ## Warning: Removed 8 rows containing missing values (position_stack).
 ```
 
-![plot of chunk hist_total_steps_per_day](figure\hist_total_steps_per_day.png) 
+![plot of chunk hist_total_steps_per_day](figure/hist_total_steps_per_day.png) 
 
 _Eval 3: Are both the mean and median number of steps taken each day reported?_  
 Yes, see below.
@@ -162,7 +162,7 @@ colnames(avg_daily_activity_by_interval) <- c("Interval", "MeanStepsByInterval")
 ggplot(data=avg_daily_activity_by_interval, aes(x=Interval, y=MeanStepsByInterval), na.rm = TRUE) + geom_line(colour="black", stat="identity") +  labs(x = "5 minute interval", y = "Mean number of steps taken across all days") + theme_bw(base_size = 12)
 ```
 
-![plot of chunk time_series_plot](figure\time_series_plot.png) 
+![plot of chunk time_series_plot](figure/time_series_plot.png) 
 
 _Eval 5: Does the report give the 5-minute interval that, on average, contains the maximum number of steps?_     
 Yes, see below after the embedded r code. 
@@ -240,7 +240,7 @@ names(activity_summary_by_day_imputed) <- c("Date", "TotalStepsPerDayImputed", "
 ggplot(data = activity_summary_by_day_imputed, aes(x=Date, y=TotalStepsPerDayImputed), na.rm = TRUE) + geom_bar(colour="black", stat="identity") +  labs(x = "Date", y = "Total number of steps per day (imputed)") + theme_bw(base_size = 12)
 ```
 
-![plot of chunk Redo_Histogram](figure\Redo_Histogram.png) 
+![plot of chunk Redo_Histogram](figure/Redo_Histogram.png) 
 
 Calculate and report the mean and median total number of steps taken per day (using the cleaned up data).
 
@@ -348,4 +348,4 @@ colnames(avg_daily_activity_by_interval_imputed) <- c("df_date_week", "date", "i
 ggplot(data=avg_daily_activity_by_interval_imputed, aes(x=interval, y=mean_steps_imputed), na.rm = TRUE) + geom_line(colour="black", stat="identity") +  labs(x = "5 minute interval", y = "Mean number of steps taken across all days") + theme_bw(base_size = 12) + facet_grid(df_date_week ~ .) 
 ```
 
-![plot of chunk imputed](figure\imputed.png) 
+![plot of chunk imputed](figure/imputed.png) 
