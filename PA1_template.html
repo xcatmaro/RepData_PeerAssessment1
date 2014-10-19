@@ -196,7 +196,7 @@ library(knitr)
 </ul>
 
 <pre><code class="r"># Set global knitr options to ensure that figures are stored in the _figure_ subdirectory
-opts_chunk$set(fig.path=&#39;figure\\&#39;)  
+opts_chunk$set(fig.path=&#39;figure/&#39;)  
 </code></pre>
 
 <h3>Part 1 - Load and preprocess the data</h3>
@@ -235,7 +235,7 @@ ggplot(data = activity_summary_by_day, aes(x=Date, y=TotalStepsPerDay), na.rm = 
 <pre><code>## Warning: Removed 8 rows containing missing values (position_stack).
 </code></pre>
 
-<p><img src="figurehist_total_steps_per_day.png" alt="plot of chunk hist_total_steps_per_day"> </p>
+<p><img src="figure/hist_total_steps_per_day.png" alt="plot of chunk hist_total_steps_per_day"> </p>
 
 <p><em>Eval 3: Are both the mean and median number of steps taken each day reported?</em><br>
 Yes, see below.</p>
@@ -629,7 +629,7 @@ colnames(avg_daily_activity_by_interval) &lt;- c(&quot;Interval&quot;, &quot;Mea
 ggplot(data=avg_daily_activity_by_interval, aes(x=Interval, y=MeanStepsByInterval), na.rm = TRUE) + geom_line(colour=&quot;black&quot;, stat=&quot;identity&quot;) +  labs(x = &quot;5 minute interval&quot;, y = &quot;Mean number of steps taken across all days&quot;) + theme_bw(base_size = 12)
 </code></pre>
 
-<p><img src="figuretime_series_plot.png" alt="plot of chunk time_series_plot"> </p>
+<p><img src="figure/time_series_plot.png" alt="plot of chunk time_series_plot"> </p>
 
 <p><em>Eval 5: Does the report give the 5-minute interval that, on average, contains the maximum number of steps?</em><br>
 Yes, see below after the embedded r code. </p>
@@ -701,7 +701,7 @@ names(activity_summary_by_day_imputed) &lt;- c(&quot;Date&quot;, &quot;TotalStep
 ggplot(data = activity_summary_by_day_imputed, aes(x=Date, y=TotalStepsPerDayImputed), na.rm = TRUE) + geom_bar(colour=&quot;black&quot;, stat=&quot;identity&quot;) +  labs(x = &quot;Date&quot;, y = &quot;Total number of steps per day (imputed)&quot;) + theme_bw(base_size = 12)
 </code></pre>
 
-<p><img src="figureRedo_Histogram.png" alt="plot of chunk Redo_Histogram"> </p>
+<p><img src="figure/Redo_Histogram.png" alt="plot of chunk Redo_Histogram"> </p>
 
 <p>Calculate and report the mean and median total number of steps taken per day (using the cleaned up data).</p>
 
@@ -1306,7 +1306,7 @@ colnames(avg_daily_activity_by_interval_imputed) &lt;- c(&quot;df_date_week&quot
 ggplot(data=avg_daily_activity_by_interval_imputed, aes(x=interval, y=mean_steps_imputed), na.rm = TRUE) + geom_line(colour=&quot;black&quot;, stat=&quot;identity&quot;) +  labs(x = &quot;5 minute interval&quot;, y = &quot;Mean number of steps taken across all days&quot;) + theme_bw(base_size = 12) + facet_grid(df_date_week ~ .) 
 </code></pre>
 
-<p><img src="figureimputed.png" alt="plot of chunk imputed"> </p>
+<p><img src="figure/imputed.png" alt="plot of chunk imputed"> </p>
 
 </body>
 
